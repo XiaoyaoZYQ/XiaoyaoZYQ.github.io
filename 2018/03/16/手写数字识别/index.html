@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基于模板匹配的手写数字识别智能计算课第一周的实验是做基于模板匹配的手写数字识别，光听见就很感兴趣，于是决定认真做做这个实验，本实验基于python3+opencv的python版本，所用到的知识都比较简单，基本上边学边做，技术含量很低。 实现思路：1234567891011121314st=&amp;gt;start: 开始e=&amp;gt;end: 结束io1=&amp;gt;inputoutput: 手写数字op1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于模板匹配的手写数字识别(python+opencv)">
+<meta property="og:url" content="http://yoursite.com/2018/03/16/手写数字识别/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="基于模板匹配的手写数字识别智能计算课第一周的实验是做基于模板匹配的手写数字识别，光听见就很感兴趣，于是决定认真做做这个实验，本实验基于python3+opencv的python版本，所用到的知识都比较简单，基本上边学边做，技术含量很低。 实现思路：1234567891011121314st=&amp;gt;start: 开始e=&amp;gt;end: 结束io1=&amp;gt;inputoutput: 手写数字op1">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/window.png">
+<meta property="og:image" content="http://yoursite.com/images/noise.png">
+<meta property="og:image" content="http://yoursite.com/images/0-1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/m.bmp">
+<meta property="og:updated_time" content="2018-03-16T07:45:14.749Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于模板匹配的手写数字识别(python+opencv)">
+<meta name="twitter:description" content="基于模板匹配的手写数字识别智能计算课第一周的实验是做基于模板匹配的手写数字识别，光听见就很感兴趣，于是决定认真做做这个实验，本实验基于python3+opencv的python版本，所用到的知识都比较简单，基本上边学边做，技术含量很低。 实现思路：1234567891011121314st=&amp;gt;start: 开始e=&amp;gt;end: 结束io1=&amp;gt;inputoutput: 手写数字op1">
+<meta name="twitter:image" content="http://yoursite.com/images/window.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/16/手写数字识别/"/>
+
+
+
+
+
+  <title>基于模板匹配的手写数字识别(python+opencv) | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/16/手写数字识别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于模板匹配的手写数字识别(python+opencv)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-16T15:42:04+08:00">
+                2018-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/opencv/" itemprop="url" rel="index">
+                    <span itemprop="name">opencv</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基于模板匹配的手写数字识别"><a href="#基于模板匹配的手写数字识别" class="headerlink" title="基于模板匹配的手写数字识别"></a>基于模板匹配的手写数字识别</h1><p>智能计算课第一周的实验是做基于模板匹配的手写数字识别，光听见就很感兴趣，于是决定认真做做这个实验，本实验基于python3+opencv的python版本，所用到的知识都比较简单，基本上边学边做，技术含量很低。</p>
+<h2 id="实现思路："><a href="#实现思路：" class="headerlink" title="实现思路："></a>实现思路：</h2><center><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: 开始</span><br><span class="line">e=&gt;end: 结束</span><br><span class="line">io1=&gt;inputoutput: 手写数字</span><br><span class="line">op1=&gt;operation: 图片标准化</span><br><span class="line">op2=&gt;operation: 与模板库对比</span><br><span class="line">cond=&gt;condition: 人工鉴别</span><br><span class="line">op3=&gt;operation: 纠错并加入模板库</span><br><span class="line">io2=&gt;inputoutput: 识别正确</span><br><span class="line">io4=&gt;inputoutput: 无法识别</span><br><span class="line">end=&gt;end: 结束</span><br><span class="line"></span><br><span class="line">st-&gt;io1-&gt;op1-&gt;op2-&gt;cond</span><br><span class="line">cond(yes)-&gt;io2-&gt;end</span><br><span class="line">cond(no,left)-&gt;op3-&gt;end</span><br></pre></td></tr></table></figure><br><br></center>
+
+<p>大致就是这么个思路但其实纠错模块还没写出来，先搁置一下吧，准备先上手第二个实验。</p>
+<h4 id="下面按照流程图讲讲详细步骤吧"><a href="#下面按照流程图讲讲详细步骤吧" class="headerlink" title="下面按照流程图讲讲详细步骤吧"></a>下面按照流程图讲讲详细步骤吧</h4><h5 id="手写数字"><a href="#手写数字" class="headerlink" title="手写数字"></a>手写数字</h5><blockquote>
+<p>window.py</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> recognition <span class="keyword">as</span> rec</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># import Tanimoto as t</span></span><br><span class="line"></span><br><span class="line">img = np.zeros((<span class="number">400</span>,<span class="number">400</span>),np.uint8)</span><br><span class="line"></span><br><span class="line">app = tkinter.Tk()</span><br><span class="line">app.resizable(<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">app.title(<span class="string">'数字识别 v1.0'</span>)</span><br><span class="line">app[<span class="string">'width'</span>]=<span class="number">400</span></span><br><span class="line">app[<span class="string">'height'</span>]=<span class="number">400</span></span><br><span class="line"></span><br><span class="line">yseno = tkinter.IntVar(value=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">X = tkinter.IntVar(value=<span class="number">0</span>)</span><br><span class="line">Y = tkinter.IntVar(value=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">foreColor = <span class="string">'#000000'</span></span><br><span class="line">backColor = <span class="string">'#FFFFFF'</span></span><br><span class="line"></span><br><span class="line">image = tkinter.PhotoImage()</span><br><span class="line">canvas = tkinter.Canvas(app,bg=<span class="string">'white'</span>,width=<span class="number">400</span>,height=<span class="number">400</span>)</span><br><span class="line">canvas.create_image(<span class="number">400</span>,<span class="number">400</span>,image=image)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">onLeftButtonDown</span><span class="params">(event)</span>:</span></span><br><span class="line">    yseno.set(<span class="number">1</span>)</span><br><span class="line">    X.set(event.x)</span><br><span class="line">    Y.set(event.y)</span><br><span class="line"></span><br><span class="line">canvas.bind(<span class="string">'&lt;Button-1&gt;'</span>,onLeftButtonDown)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">onLeftButtonMove</span><span class="params">(event)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> yseno.get()==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    canvas.create_line(X.get(),Y.get(),event.x,event.y,fill=foreColor,width=<span class="number">10</span>)</span><br><span class="line">    X.set(event.x)</span><br><span class="line">    Y.set(event.y)</span><br><span class="line">    <span class="keyword">if</span> (event.x<span class="number">-3</span>&gt;=<span class="number">0</span>) <span class="keyword">and</span> (event.x+<span class="number">3</span>&lt;=<span class="number">400</span>) <span class="keyword">and</span> (event.y<span class="number">-3</span>&gt;=<span class="number">0</span>) <span class="keyword">and</span> (event.y+<span class="number">3</span>&lt;=<span class="number">400</span>):</span><br><span class="line">        img[event.y<span class="number">-3</span>:event.y+<span class="number">3</span>,event.x<span class="number">-3</span>:event.x+<span class="number">3</span>]=<span class="number">255</span></span><br><span class="line"></span><br><span class="line">canvas.bind(<span class="string">'&lt;B1-Motion&gt;'</span>,onLeftButtonMove)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">onLeftButtonUp</span><span class="params">(event)</span>:</span></span><br><span class="line">    <span class="comment"># canvas.create_line(X.get(),Y.get(),event.x,event.y,fill=foreColor)</span></span><br><span class="line"></span><br><span class="line">    yseno.set(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">canvas.bind(<span class="string">'&lt;ButtonRelease-1&gt;'</span>,onLeftButtonUp)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">clear</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> img</span><br><span class="line">    img = img * <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> canvas.find_all():</span><br><span class="line">        canvas.delete(item)</span><br><span class="line">        <span class="comment"># print(item)</span></span><br><span class="line">buttonClear = tkinter.Button(app,text=<span class="string">'清除'</span>,command=clear)</span><br><span class="line">buttonClear.place(x=<span class="number">200</span>,y=<span class="number">370</span>,width=<span class="number">200</span>,height=<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recognition</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment">#保存图片...得到img</span></span><br><span class="line">    <span class="keyword">global</span> img</span><br><span class="line">    <span class="comment"># img = img.T</span></span><br><span class="line">    </span><br><span class="line">    num = rec.recognition(img)</span><br><span class="line">    print(<span class="string">'识别出的数字为：'</span>,num)</span><br><span class="line">    <span class="comment"># cv2.imshow('img',img)</span></span><br><span class="line">    <span class="comment"># cv2.waitKey(0)</span></span><br><span class="line">    <span class="comment"># cv2.destroyAllWindows</span></span><br><span class="line">    </span><br><span class="line">buttonRec = tkinter.Button(app,text=<span class="string">'识别'</span>,command=recognition)</span><br><span class="line">buttonRec.place(x=<span class="number">0</span>,y=<span class="number">370</span>,width=<span class="number">200</span>,height=<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">canvas.pack(fill=tkinter.BOTH,expand=tkinter.YES)</span><br><span class="line"></span><br><span class="line">app.mainloop()</span><br></pre></td></tr></table></figure>
+<p>照着图书馆借来的书，边看边敲的代码，所以比较简单，实现的功能也比较简单，运行结果如图：</p>
+<p><img src="/images/window.png" alt=""></p>
+<h5 id="图片标准化"><a href="#图片标准化" class="headerlink" title="图片标准化"></a>图片标准化</h5><p>标准化图片我这里分四步：像素取反，灰度化，去噪以及图片分割。</p>
+<p>1.像素取反   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">negation</span><span class="params">(img)</span>:</span><span class="comment">#图片取反</span></span><br><span class="line">    img = cv2.bitwise_not(img)</span><br><span class="line">    <span class="keyword">return</span> img</span><br></pre></td></tr></table></figure>
+<p>其实就一句话，也就是用opencv自带的方法 <code>cv2.bitwise_not</code>方法就OK了</p>
+<p>2.灰度化（+二值化）   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">graying</span><span class="params">(img)</span>:</span><span class="comment">#二值化图像</span></span><br><span class="line">    img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)</span><br><span class="line">    ret,thresh=cv2.threshold(img,<span class="number">250</span>,<span class="number">255</span>,cv2.THRESH_BINARY)</span><br><span class="line">    img = thresh</span><br><span class="line">    <span class="keyword">return</span> thresh</span><br></pre></td></tr></table></figure>
+<p>同样使用opencv函数，得到的是黑底（0）白字（255）。</p>
+<p>3.去噪   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">denoise</span><span class="params">(img)</span>:</span></span><br><span class="line">    kernel = np.ones((<span class="number">5</span>,<span class="number">5</span>),np.uint8)</span><br><span class="line">    img = cv2.morphologyEx(img,cv2.MORPH_OPEN,kernel)</span><br><span class="line">    img = cv2.blur(img,(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">    <span class="keyword">return</span> img</span><br></pre></td></tr></table></figure>
+<p>用到中值滤波和低通滤波，原意是为了去掉离群点，但经过老师点拨，发现效果其实并不好我去掉的只是数字周围的毛刺点，并不是离群点，如下图<img src="/images/noise.png" alt=""></p>
+<p>就没办法得到理想的效果，最新的想法是利用能量分布去除离群点（不是很懂，找时间研究研究），好像马氏距离也行？嗯，先放放···</p>
+<p>4.图片分割</p>
+<p>原图是这样的<img src="/images/0-1.bmp" alt="">然后分割完（中间经过了上述各种处理）变成了这样的<img src="/images/m.bmp" alt=""></p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">splitPicture</span><span class="params">(img)</span>:</span></span><br><span class="line">    img = standard(img)</span><br><span class="line">    binary,contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(contours)):</span><br><span class="line">        x,y,w,h = cv2.boundingRect(contours[i])</span><br><span class="line">        <span class="comment"># print([x,y,w,h])</span></span><br><span class="line">    img = img[y:y+h,x:x+w]</span><br><span class="line">    <span class="keyword">return</span> img</span><br></pre></td></tr></table></figure>
+<p><code>cv2.findContours</code>函数是opencv的轮廓检测函数，其中返回值<code>coutours</code>是轮廓点集，再利用<code>cv2.boundingRect</code>函数，得出最小矩形边框，<code>x,y,w,h</code>分别是该矩形左上角坐标及矩形宽高，然后用numpy索引就可以 <strong>高效</strong>分割图片啦（之所以强调 <strong>高效</strong>，是因为最开始我用自己的双重for循环做出来的东西跑一趟要30多秒，而现在只要不到0.3秒，所以好好利用库函数总是没错的！）</p>
+<h5 id="与模板库对比"><a href="#与模板库对比" class="headerlink" title="与模板库对比"></a>与模板库对比</h5><p>模板匹配，顾名思义就是与模板对比，以某种方式得出两张图片的相似程度，从而判断出手写数字是多少。我的第一版用的是欧氏距离匹配，简单来说，两点欧式距离</p>
+<p>$d=\sqrt{(x1-x2)^2+(y1-y2)^2}$</p>
+<p>而对于图像来说，我们可以先算出它的特征值，然后求特征值之间的距离，就可以得到相似程度的距离值。</p>
+<p>首先，求特征值。为了减少计算量，我把每张图片分成$5*5$即每张图分为25小块，每一小块的特征值用该区域白色（255）像素点个数除以该块总像素数代表，每张图片有25个特征值，对比两张图片就是依次比较它们的特征值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getEigenvalue</span><span class="params">(img)</span>:</span><span class="comment">#传入图片，返回一个特征值列表</span></span><br><span class="line">    img = splitPicture(img)</span><br><span class="line">    h,w = img.shape</span><br><span class="line">    h0 = int(h/<span class="number">5</span>)</span><br><span class="line">    w0 = int(w/<span class="number">5</span>)</span><br><span class="line">    <span class="comment"># print([h0,w0])</span></span><br><span class="line">    <span class="comment"># count = 0</span></span><br><span class="line">    <span class="comment"># imgList = []#25张小图片</span></span><br><span class="line">    ratioList = []<span class="comment">#小图片白色像素特征值列表</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">            <span class="comment"># imgList.append(img[i+i*h0:i+(i+1)*h0,j+j*w0:j+(j+1)*w0])</span></span><br><span class="line">            ratioList.append(getRatio(img[i+i*h0:i+(i+<span class="number">1</span>)*h0,j+j*w0:j+(j+<span class="number">1</span>)*w0]))</span><br><span class="line">    <span class="comment"># for k in range(len(imgList)):</span></span><br><span class="line">    <span class="comment"># ratioList.append(getRatio(imgList[k]))</span></span><br><span class="line">    <span class="comment"># print(ratioList)</span></span><br><span class="line">    <span class="keyword">return</span> ratioList</span><br></pre></td></tr></table></figure>
+<p>然后，得到”距离“。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getDistance</span><span class="params">(img1,img2)</span>:</span></span><br><span class="line">    list1 = getEigenvalue(img1)</span><br><span class="line">    list2 = getEigenvalue(img2)</span><br><span class="line">    distance = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">25</span>):</span><br><span class="line">        distance = distance + (list1[i]-list2[i])**<span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> int(math.sqrt(distance))</span><br><span class="line">    <span class="comment">#return int(distance)</span></span><br></pre></td></tr></table></figure>
+<p>到这里，思路已经很清晰了，将所要识别的数字图像依次和图片库中的图片对比求“距离”，取“距离值”最小的数字代表的值即为所要识别的数字的值。</p>
+<p>剩下的就是依次对比的部分了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getImgNameList</span><span class="params">()</span>:</span><span class="comment">#获取图片库每张图片的路径及其所代表的数字</span></span><br><span class="line">    wolk_path = os.path.split(os.path.realpath(__file__))[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># print(os.listdir(wolk_path))</span></span><br><span class="line">    <span class="comment">#rootList = os.listdir(wolk_path)</span></span><br><span class="line">    source_path = os.path.join(wolk_path,<span class="string">'source photo'</span>)</span><br><span class="line">    <span class="comment">#print(source_path)</span></span><br><span class="line">    imgdir_path_list=[]</span><br><span class="line">    <span class="comment"># img_path_list=[]</span></span><br><span class="line">    namemap=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        imgdir_path = os.path.join(source_path,str(i))<span class="comment">#source下0,1...等目录</span></span><br><span class="line">        <span class="comment">#print(imgdir_path)</span></span><br><span class="line">        imgdir_path_list.append(imgdir_path)</span><br><span class="line">        <span class="comment"># print(os.listdir(imgdir_path_list[0]))</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        dir = len(os.listdir(imgdir_path_list[j]))</span><br><span class="line">        <span class="comment">#print(os.listdir(imgdir_path_list[j]))</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(dir):</span><br><span class="line">            img_path = os.path.join(imgdir_path_list[j],(os.listdir(imgdir_path_list[j]))[k])</span><br><span class="line">            <span class="comment"># img_path_list.append(img_path)</span></span><br><span class="line">            <span class="comment">#print(img_path)</span></span><br><span class="line">            namemap[img_path]=j</span><br><span class="line">    <span class="comment"># return img_path_list,namemap</span></span><br><span class="line">    <span class="keyword">return</span> namemap</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recognition</span><span class="params">(img1)</span>:</span><span class="comment">#识别</span></span><br><span class="line">    <span class="comment"># img1 = cv2.imread(img1)</span></span><br><span class="line">    <span class="comment"># img_path_list,namemap = getImgNameList()</span></span><br><span class="line">    namemap = getImgNameList()</span><br><span class="line">    <span class="comment"># print(namemap.keys()[0])</span></span><br><span class="line">    similarty = []</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># for i in range(len(img_path_list)):</span></span><br><span class="line">            <span class="comment"># img2 = cv2.imread(img_path_list[i])</span></span><br><span class="line">            <span class="comment">#print(img_path_list[i])</span></span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> namemap.keys():</span><br><span class="line">            <span class="comment"># print(key)</span></span><br><span class="line">            img2 = cv2.imread(key)</span><br><span class="line">            <span class="comment"># cv2.imshow('img',img2)</span></span><br><span class="line">            <span class="comment"># cv2.waitKey(0)</span></span><br><span class="line">            <span class="comment"># print(key)</span></span><br><span class="line">            similarty.append(getDistance(img1,img2))</span><br><span class="line">            <span class="comment"># print(similarty[i],'..................')</span></span><br></pre></td></tr></table></figure>
+<h5 id="最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。"><a href="#最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。" class="headerlink" title="最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。"></a>最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。</h5>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于模板匹配的手写数字识别"><span class="nav-number">1.</span> <span class="nav-text">基于模板匹配的手写数字识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现思路："><span class="nav-number">1.1.</span> <span class="nav-text">实现思路：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下面按照流程图讲讲详细步骤吧"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">下面按照流程图讲讲详细步骤吧</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#手写数字"><span class="nav-number">1.1.0.1.1.</span> <span class="nav-text">手写数字</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#图片标准化"><span class="nav-number">1.1.0.1.2.</span> <span class="nav-text">图片标准化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#与模板库对比"><span class="nav-number">1.1.0.1.3.</span> <span class="nav-text">与模板库对比</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。"><span class="nav-number">1.1.0.1.4.</span> <span class="nav-text">最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
