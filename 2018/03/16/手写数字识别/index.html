@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="基于模板匹配的手写数字识别智能计算课第一周的实验是做基于模板匹配的手写数字识别，光听见就很感兴趣，于是决定认真做做这个实验，本实验基于python3+opencv的python版本，所用到的知识都比较简单，基本上边学边做，技术含量很低。 实现思路：1234567891011121314st=&amp;gt;start: 开始e=&amp;gt;end: 结束io1=&amp;gt;inputoutput: 手写数字op1">
+<meta name="description" content="基于模板匹配的手写数字识别智能计算课第一周的实验是做基于模板匹配的手写数字识别，光听见就很感兴趣，于是决定认真做做这个实验，本实验基于python3+opencv的python版本，所用到的知识都比较简单，基本上边学边做，技术含量很低。 实现思路：      大致就是这么个思路但其实纠错模块还没写出来，先搁置一下吧，准备先上手第二个实验。 下面按照流程图讲讲详细步骤吧手写数字 window.py">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于模板匹配的手写数字识别(python+opencv)">
 <meta property="og:url" content="http://yoursite.com/2018/03/16/手写数字识别/index.html">
 <meta property="og:site_name" content="小妖的博客">
-<meta property="og:description" content="基于模板匹配的手写数字识别智能计算课第一周的实验是做基于模板匹配的手写数字识别，光听见就很感兴趣，于是决定认真做做这个实验，本实验基于python3+opencv的python版本，所用到的知识都比较简单，基本上边学边做，技术含量很低。 实现思路：1234567891011121314st=&amp;gt;start: 开始e=&amp;gt;end: 结束io1=&amp;gt;inputoutput: 手写数字op1">
+<meta property="og:description" content="基于模板匹配的手写数字识别智能计算课第一周的实验是做基于模板匹配的手写数字识别，光听见就很感兴趣，于是决定认真做做这个实验，本实验基于python3+opencv的python版本，所用到的知识都比较简单，基本上边学边做，技术含量很低。 实现思路：      大致就是这么个思路但其实纠错模块还没写出来，先搁置一下吧，准备先上手第二个实验。 下面按照流程图讲讲详细步骤吧手写数字 window.py">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/window.png">
 <meta property="og:image" content="http://yoursite.com/images/noise.png">
@@ -93,7 +93,7 @@
 <meta property="og:updated_time" content="2018-03-16T07:45:14.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于模板匹配的手写数字识别(python+opencv)">
-<meta name="twitter:description" content="基于模板匹配的手写数字识别智能计算课第一周的实验是做基于模板匹配的手写数字识别，光听见就很感兴趣，于是决定认真做做这个实验，本实验基于python3+opencv的python版本，所用到的知识都比较简单，基本上边学边做，技术含量很低。 实现思路：1234567891011121314st=&amp;gt;start: 开始e=&amp;gt;end: 结束io1=&amp;gt;inputoutput: 手写数字op1">
+<meta name="twitter:description" content="基于模板匹配的手写数字识别智能计算课第一周的实验是做基于模板匹配的手写数字识别，光听见就很感兴趣，于是决定认真做做这个实验，本实验基于python3+opencv的python版本，所用到的知识都比较简单，基本上边学边做，技术含量很低。 实现思路：      大致就是这么个思路但其实纠错模块还没写出来，先搁置一下吧，准备先上手第二个实验。 下面按照流程图讲讲详细步骤吧手写数字 window.py">
 <meta name="twitter:image" content="http://yoursite.com/images/window.png">
 
 
@@ -338,7 +338,11 @@
 
       
         <h1 id="基于模板匹配的手写数字识别"><a href="#基于模板匹配的手写数字识别" class="headerlink" title="基于模板匹配的手写数字识别"></a>基于模板匹配的手写数字识别</h1><p>智能计算课第一周的实验是做基于模板匹配的手写数字识别，光听见就很感兴趣，于是决定认真做做这个实验，本实验基于python3+opencv的python版本，所用到的知识都比较简单，基本上边学边做，技术含量很低。</p>
-<h2 id="实现思路："><a href="#实现思路：" class="headerlink" title="实现思路："></a>实现思路：</h2><center><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: 开始</span><br><span class="line">e=&gt;end: 结束</span><br><span class="line">io1=&gt;inputoutput: 手写数字</span><br><span class="line">op1=&gt;operation: 图片标准化</span><br><span class="line">op2=&gt;operation: 与模板库对比</span><br><span class="line">cond=&gt;condition: 人工鉴别</span><br><span class="line">op3=&gt;operation: 纠错并加入模板库</span><br><span class="line">io2=&gt;inputoutput: 识别正确</span><br><span class="line">io4=&gt;inputoutput: 无法识别</span><br><span class="line">end=&gt;end: 结束</span><br><span class="line"></span><br><span class="line">st-&gt;io1-&gt;op1-&gt;op2-&gt;cond</span><br><span class="line">cond(yes)-&gt;io2-&gt;end</span><br><span class="line">cond(no,left)-&gt;op3-&gt;end</span><br></pre></td></tr></table></figure><br><br></center>
+<h2 id="实现思路："><a href="#实现思路：" class="headerlink" title="实现思路："></a>实现思路：</h2><center>
+
+<div id="flowchart-0" class="flow-chart"></div>
+
+</center>
 
 <p>大致就是这么个思路但其实纠错模块还没写出来，先搁置一下吧，准备先上手第二个实验。</p>
 <h4 id="下面按照流程图讲讲详细步骤吧"><a href="#下面按照流程图讲讲详细步骤吧" class="headerlink" title="下面按照流程图讲讲详细步骤吧"></a>下面按照流程图讲讲详细步骤吧</h4><h5 id="手写数字"><a href="#手写数字" class="headerlink" title="手写数字"></a>手写数字</h5><blockquote>
@@ -373,7 +377,20 @@
 <p>到这里，思路已经很清晰了，将所要识别的数字图像依次和图片库中的图片对比求“距离”，取“距离值”最小的数字代表的值即为所要识别的数字的值。</p>
 <p>剩下的就是依次对比的部分了</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getImgNameList</span><span class="params">()</span>:</span><span class="comment">#获取图片库每张图片的路径及其所代表的数字</span></span><br><span class="line">    wolk_path = os.path.split(os.path.realpath(__file__))[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># print(os.listdir(wolk_path))</span></span><br><span class="line">    <span class="comment">#rootList = os.listdir(wolk_path)</span></span><br><span class="line">    source_path = os.path.join(wolk_path,<span class="string">'source photo'</span>)</span><br><span class="line">    <span class="comment">#print(source_path)</span></span><br><span class="line">    imgdir_path_list=[]</span><br><span class="line">    <span class="comment"># img_path_list=[]</span></span><br><span class="line">    namemap=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        imgdir_path = os.path.join(source_path,str(i))<span class="comment">#source下0,1...等目录</span></span><br><span class="line">        <span class="comment">#print(imgdir_path)</span></span><br><span class="line">        imgdir_path_list.append(imgdir_path)</span><br><span class="line">        <span class="comment"># print(os.listdir(imgdir_path_list[0]))</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        dir = len(os.listdir(imgdir_path_list[j]))</span><br><span class="line">        <span class="comment">#print(os.listdir(imgdir_path_list[j]))</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(dir):</span><br><span class="line">            img_path = os.path.join(imgdir_path_list[j],(os.listdir(imgdir_path_list[j]))[k])</span><br><span class="line">            <span class="comment"># img_path_list.append(img_path)</span></span><br><span class="line">            <span class="comment">#print(img_path)</span></span><br><span class="line">            namemap[img_path]=j</span><br><span class="line">    <span class="comment"># return img_path_list,namemap</span></span><br><span class="line">    <span class="keyword">return</span> namemap</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recognition</span><span class="params">(img1)</span>:</span><span class="comment">#识别</span></span><br><span class="line">    <span class="comment"># img1 = cv2.imread(img1)</span></span><br><span class="line">    <span class="comment"># img_path_list,namemap = getImgNameList()</span></span><br><span class="line">    namemap = getImgNameList()</span><br><span class="line">    <span class="comment"># print(namemap.keys()[0])</span></span><br><span class="line">    similarty = []</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># for i in range(len(img_path_list)):</span></span><br><span class="line">            <span class="comment"># img2 = cv2.imread(img_path_list[i])</span></span><br><span class="line">            <span class="comment">#print(img_path_list[i])</span></span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> namemap.keys():</span><br><span class="line">            <span class="comment"># print(key)</span></span><br><span class="line">            img2 = cv2.imread(key)</span><br><span class="line">            <span class="comment"># cv2.imshow('img',img2)</span></span><br><span class="line">            <span class="comment"># cv2.waitKey(0)</span></span><br><span class="line">            <span class="comment"># print(key)</span></span><br><span class="line">            similarty.append(getDistance(img1,img2))</span><br><span class="line">            <span class="comment"># print(similarty[i],'..................')</span></span><br></pre></td></tr></table></figure>
-<h5 id="最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。"><a href="#最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。" class="headerlink" title="最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。"></a>最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。</h5>
+<h5 id="最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。"><a href="#最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。" class="headerlink" title="最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。"></a>最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始
+e=>end: 结束
+io1=>inputoutput: 手写数字
+op1=>operation: 图片标准化
+op2=>operation: 与模板库对比
+cond=>condition: 人工鉴别
+op3=>operation: 纠错并加入模板库
+io2=>inputoutput: 识别正确
+io4=>inputoutput: 无法识别
+end=>end: 结束
+
+st->io1->op1->op2->cond
+cond(yes)->io2->end
+cond(no,left)->op3->end</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></h5>
       
     </div>
     
@@ -526,7 +543,20 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于模板匹配的手写数字识别"><span class="nav-number">1.</span> <span class="nav-text">基于模板匹配的手写数字识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现思路："><span class="nav-number">1.1.</span> <span class="nav-text">实现思路：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下面按照流程图讲讲详细步骤吧"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">下面按照流程图讲讲详细步骤吧</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#手写数字"><span class="nav-number">1.1.0.1.1.</span> <span class="nav-text">手写数字</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#图片标准化"><span class="nav-number">1.1.0.1.2.</span> <span class="nav-text">图片标准化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#与模板库对比"><span class="nav-number">1.1.0.1.3.</span> <span class="nav-text">与模板库对比</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。"><span class="nav-number">1.1.0.1.4.</span> <span class="nav-text">最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于模板匹配的手写数字识别"><span class="nav-number">1.</span> <span class="nav-text">基于模板匹配的手写数字识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现思路："><span class="nav-number">1.1.</span> <span class="nav-text">实现思路：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下面按照流程图讲讲详细步骤吧"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">下面按照流程图讲讲详细步骤吧</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#手写数字"><span class="nav-number">1.1.0.1.1.</span> <span class="nav-text">手写数字</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#图片标准化"><span class="nav-number">1.1.0.1.2.</span> <span class="nav-text">图片标准化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#与模板库对比"><span class="nav-number">1.1.0.1.3.</span> <span class="nav-text">与模板库对比</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。"><span class="nav-number">1.1.0.1.4.</span> <span class="nav-text">最后，纠错模块就是人工指出数字是几，然后将图片保存到相应文件夹，因为图片的命名没啥思路，就先偷个懒先放着了，然后就是，想把识别结果也用窗口显示出来，也先搁着了。st=&gt;start: 开始
+e=&gt;end: 结束
+io1=&gt;inputoutput: 手写数字
+op1=&gt;operation: 图片标准化
+op2=&gt;operation: 与模板库对比
+cond=&gt;condition: 人工鉴别
+op3=&gt;operation: 纠错并加入模板库
+io2=&gt;inputoutput: 识别正确
+io4=&gt;inputoutput: 无法识别
+end=&gt;end: 结束
+
+st-&gt;io1-&gt;op1-&gt;op2-&gt;cond
+cond(yes)-&gt;io2-&gt;end
+cond(no,left)-&gt;op3-&gt;end{&quot;scale&quot;:1,&quot;line-width&quot;:2,&quot;line-length&quot;:50,&quot;text-margin&quot;:10,&quot;font-size&quot;:12}  var code = document.getElementById(&quot;flowchart-0-code&quot;).value;  var options = JSON.parse(decodeURIComponent(document.getElementById(&quot;flowchart-0-options&quot;).value));  var diagram = flowchart.parse(code);  diagram.drawSVG(&quot;flowchart-0&quot;, options);</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
