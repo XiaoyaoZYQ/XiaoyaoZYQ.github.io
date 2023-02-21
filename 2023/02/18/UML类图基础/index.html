@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>UML类图基础 | 橡 语</title><meta name="author" content="yueqiang_zhou"><meta name="copyright" content="yueqiang_zhou"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="类图用于描述系统中所包含的类以及它们之间的相互关系，帮助人们简化对系统的理解，他是系统分析和设计阶段的重要产物，也是系统编码和测试的重要模型依据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UML类图基础">
+<meta property="og:url" content="https://xiaoyaozyq.github.io/2023/02/18/UML%E7%B1%BB%E5%9B%BE%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="橡 语">
+<meta property="og:description" content="类图用于描述系统中所包含的类以及它们之间的相互关系，帮助人们简化对系统的理解，他是系统分析和设计阶段的重要产物，也是系统编码和测试的重要模型依据">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/1111.jpeg">
+<meta property="article:published_time" content="2023-02-18T08:30:41.000Z">
+<meta property="article:modified_time" content="2023-02-21T02:32:05.855Z">
+<meta property="article:author" content="yueqiang_zhou">
+<meta property="article:tag" content="UML类图">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/1111.jpeg"><link rel="shortcut icon" href="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/%E4%B8%AD%E5%9B%BD%E8%89%B2%E5%8D%A1%E7%89%87-%E7%AB%B9%E9%9D%92-1676619885182.png"><link rel="canonical" href="https://xiaoyaozyq.github.io/2023/02/18/UML%E7%B1%BB%E5%9B%BE%E5%9F%BA%E7%A1%80/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'UML类图基础',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2023-02-21 10:32:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/1111.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/%E7%AB%B9%E9%9D%92-1676617091290.png')"><nav id="nav"><span id="blog-info"><a href="/" title="橡 语"></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">UML类图基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-18T08:30:41.000Z" title="发表于 2023-02-18 16:30:41">2023-02-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-21T02:32:05.855Z" title="更新于 2023-02-21 10:32:05">2023-02-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="UML类图基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>本博客内容来自<a target="_blank" rel="noopener" href="https://blog.csdn.net/smilejiasmile/article/details/113943361">深入浅出UML类图</a></p>
+<h1 id="类的概念"><a href="#类的概念" class="headerlink" title="类的概念"></a>类的概念</h1><p>​		类（Class）封装了数据和行为，是面向对象的重要组成部分，它是具有相同属性、操作、关系的对象集合的总称。在系统中，每个类都具有一定的职责，职责指的是类要完成什么样的功能，要承担什么样的义务。一个类可以有多种职责，设计得好的类一般只有一种职责。设计类时面向对象中最重要的组成部分，也是最复杂和最耗时的部分。</p>
+<p>​		在软件系统运行时，类将被实例化成对象（Object），对象对应于某个具体的事物，是类的实例（Instance）</p>
+<p>​		类图（Class Diagram）使用出现在系统用中的不同类来描述系统的静态结构，它用来描述不同的类以及它们之间的关系。</p>
+<p>​		在系统分析与设计阶段，类通常可以分为三种，分别是实体类（Entity Class）、控制类（Control Class）和边界类（Boundard Class），三者概念主要为：</p>
+<ul>
+<li>实体类：实体类对应需求中的每个实体，它们通常需要保存在永久存储体中，一般使用数据库或文件来记录，实体类既包括存储和传递数据的类，还包括操作数据的类。实体类来源于需求说明中的名词，如学生、商品等。</li>
+<li>控制类：控制类用于体现应用程序的执行逻辑，提供相应的业务操作，将控制类抽象出来可以降低界面和数据库之间的耦合度。控制类一般是由动宾结构的短语（动词+名词）转化来的名词，如增加商品对应有一个商品增加类，注册对应有一个用户注册类等。</li>
+<li>边界类：边界类用于对外部用户与系统之间的交互对象进行抽象，主要包括界面类，如对话框、窗口、菜单等。</li>
+</ul>
+<p>​		在面向对象分析和设计的初级阶段，通常首先识别出实体类，绘制初始类图，此时的类图也可称为领域模型，包括实体类及它们之间的相互关系</p>
+<h1 id="类的UML图示"><a href="#类的UML图示" class="headerlink" title="类的UML图示"></a>类的UML图示</h1><p>​		在UML中，类使用包含类名、属性和操作且带有分隔线的长方形来表示，如定义一个<code>Employee</code>类，它包含<code>name</code>、<code>age</code>和<code>email</code>，以及操作<code>modifyInfo()</code>，在UML类图中如图所示：</p>
+<p><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/202302181902063.png" alt="Employee"></p>
+<p>​		其对应的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Employee</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">modifyInfo</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​		在UML类图中，类一般有三部分构成：</p>
+<ol>
+<li>类名：每个类都必须有类名，为字符串类型</li>
+<li>属性：属性指类的性质，即类的成员变量。一个类可以有任意多个属性，也可以没有属性，UML规定属性的表示方式为：</li>
+</ol>
+<center>可见性	名称	:	类型	[ = 缺省值]</center>
+
+<p>​		其中：</p>
+<ul>
+<li>”可见性“表示该属性对于类之外的元素是否可见，包括共有（public）、私有（private）和受保护（protected）三种，在类图中分别用+、-和#表示（PlantUML表现为圆形、正方形和菱形）。</li>
+<li>”名称“表示属性名，用字符串表示</li>
+<li>”类型“表示属性的数据类型，可以是基本数据类型，也可以是用户自定义类型</li>
+<li>”缺省值“是一个可选项，即属性的初始值</li>
+</ul>
+<ol start="3">
+<li>类的操作：操作是类的任意一个实例对象都可以使用的行为，是类的成员方法，UML规定操作的表示方式为：</li>
+</ol>
+<center>可见性	名称（参数列表）	[: 返回类型]</center>
+
+<p>​		其中：</p>
+<ul>
+<li>”可见性“定义与属性的可见性定义相同</li>
+<li>”参数列表“表示方法的参数，其语法与属性的定义相似，参数个数是任意的，多个参数之间用逗号隔开</li>
+<li>”返回类型“是一个可选项，表示方法的返回值类型，依赖于具体的编程语言，可以是基本类型，也可以是用户自定义类型，还可以是空类型（void），如果是构造方法，则无返回类型</li>
+</ul>
+<h1 id="类与类之间的关系"><a href="#类与类之间的关系" class="headerlink" title="类与类之间的关系"></a>类与类之间的关系</h1><h2 id="1-关联关系"><a href="#1-关联关系" class="headerlink" title="1.关联关系"></a>1.关联关系</h2><p>​		关联（Association）关系是类与类之间最常用的一种关系，它是一种结构化关系，用于表示一类对象与另一类对象之间有联系，如汽车和轮胎、师傅和徒弟、班级和学生等。在UML类图中，用实线连接有关联关系的对象所对应的类，在用编程语言实现关联关系时，通常将一个类的对象作为另一个类的成员变量。在使用类图表示关联关系时可以在关联线上标注角色名，一般使用一个表示两者之间关系的动词或名词表示角色名（有时该名词为实例对象名），关系的两端代表两种不同的角色，因此在一个关联关系中可以包含两个角色名，角色名不是必须的，可以根据需要添加，其目的是使类之间的关系更加明确。关联关系示例如下：</p>
+<p><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/202302182116528.png" alt="image-20230218211654170"></p>
+<p>​		对应的Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginForm</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> JButton loginButton;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JButton</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​		在UML中，关联关系通常又包含多种细分形式：</p>
+<ol>
+<li>双向关联</li>
+</ol>
+<p>​		默认情况下，关联是双向的。例如：顾客（Customer）购买并拥有商品（Product），而商品总有某个顾客与之相关联。因此属于双向关联关系，如图所示：</p>
+<p><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/202302182127468.png" alt="image-20230218212734861"></p>
+<p>​		对应的Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Customer</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Product[] products;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Product</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Customer customer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>单向关联</li>
+</ol>
+<p>​		参考上文的<code>LoginForm</code>和<code>JButton</code>即为单向关联</p>
+<ol start="3">
+<li>自关联</li>
+</ol>
+<p>​		在系统中可能会存在一些类的属性为该类本身，这种特殊的关联关系成为自关联。例如：一个节点类（Node）的成员又是Node类型的对象，如图所示：</p>
+<p><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/202302182136911.png" alt="image-20230218213610396"></p>
+<p>​		对应的Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Node subNode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>多重性关联</li>
+</ol>
+<p>​		多重性关联又称为重数性（Multiplicity）关联关系，表示两个关联对象在数量上的对应关系。在UML中，对象之间的多重性可以直接在关联关系上用一个数字或一个数字范围表示。</p>
+<p>​		对象之间可以存在多种多重性关联关系，常见的多重性表示方式如下表：</p>
+<table>
+<thead>
+<tr>
+<th>表示方式</th>
+<th>多重性说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1..1</td>
+<td>表示另一个类的一个对象只与该类的一个对象有关系</td>
+</tr>
+<tr>
+<td>0..*</td>
+<td>表示另一个类的一个对象与该类的零个或多个对象有关系</td>
+</tr>
+<tr>
+<td>1..*</td>
+<td>表示另一个类的一个对象与该类的一个或多个对象有关系</td>
+</tr>
+<tr>
+<td>0..1</td>
+<td>表示另一个类的一个对象没有或只与该类的一个对象有关系</td>
+</tr>
+<tr>
+<td>m..n</td>
+<td>表示另一个类的一个对象与该类最少m最多n个对象有关系</td>
+</tr>
+</tbody></table>
+<p>​		例如：一个界面（Form）可以拥有零个或多个按钮（Button），但是一个按钮只能属于一个界面，关系如图：</p>
+<p><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/202302182157518.png" alt="image-20230218215744091"></p>
+<p>​		对应的Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Form</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Button[] buttons;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Button</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>聚合关系</li>
+</ol>
+<p>​		聚合（Aggregation）关系表示整体与部分的关系。在聚合关系中，成员对象是整体对象的一部分，但是成员对象可以脱离整体对象独立存在。在UML中，聚合关系用带空心菱形的直线表示。例如：汽车发动机（Engine）是汽车（Car）的组成部分，但是汽车发动机可以独立存在，因此，汽车和发动机是聚合关系，如图所示：</p>
+<p><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/202302182228783.png" alt="image-20230218222829335"></p>
+<p>​		在代码实现聚合关系时，成员对象通常作为构造方法、Setter方法或业务方法的参数注入到整体对象中，对应Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Car</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Engine engine;</span><br><span class="line">    <span class="comment">//构造方法注入</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Car</span><span class="params">(Engine engine)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.engine = engine;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//setter方法注入</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setEngine</span><span class="params">(Engine engine)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.engine = engine;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>组合关系</li>
+</ol>
+<p>​		组合（Composition）关系也表示类之间整体和部分的关系，但是在组合关系中整体对象可以控制成员对象的生命周期，一旦整体对象不存在，成员对象也将不存在，成员对象与整体对象之间具有同生共死的关系。在UML中，组合关系用带实心菱形的直线表示。例如：人的头部（Head）与嘴巴（Mouth），嘴巴是头部的一部分，而如果头部没了，嘴巴也就没了，因此头和嘴巴是组合关系，如图所示：</p>
+<p><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/202302182239759.png" alt="image-20230218223912356"></p>
+<p>​		在代码实现组合关系时，通常在整体类的构造方法中直接实例化成员类，对应Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Head</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Mouth mouth;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Head</span><span class="params">()</span>&#123;</span><br><span class="line">        mouth = <span class="keyword">new</span> <span class="title class_">Mouth</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Mouth</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-依赖关系"><a href="#2-依赖关系" class="headerlink" title="2.依赖关系"></a>2.依赖关系</h2><p>​		依赖（Dependency）关系是一种使用关系，特定事物的改变有可能会影响到使用改事物的其他事物，在需要表示一个事物使用另一个事物的使用依赖关系。<strong>大多数情况下，依赖关系体现在某个类的方法使用另一个类的对象作为参数</strong>。在UML中，依赖关系用带箭头的虚线表示，有依赖的一方指向被依赖的一方。例如，驾驶员开车，在Driver类的drive()方法中，将Car类的实例对象car作为一个参数传递，以便在drive()方法中能够调用car的move()方法，且驾驶员的drive()方法依赖车的move()方法，因此Driver类依赖Car类，如图所示：</p>
+<p><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/202302202128008.png" alt="image-20230220212817773"></p>
+<p>​		在系统实施阶段，依赖关系通常有三种实现方式，第一种也是最常用的一种方式就是如上图所示将一个类的对象作为另一个类中方法的参数，第二种方式是在一个类的方法中将另一个类的对象作为其局部变量，第三种方式是在一个类的方法中调用另一个类的静态方法。第一种方式对应Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Driver</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drive</span><span class="params">(Car car)</span>&#123;</span><br><span class="line">        car.move()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Car</span>&#123;</span><br><span class="line">    publci <span class="keyword">void</span> <span class="title function_">move</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-泛化关系"><a href="#3-泛化关系" class="headerlink" title="3.泛化关系"></a>3.泛化关系</h2><p>​		泛化（Generalization）关系也就是继承关系，用于描述父类与子类之间的关系，父类又称作基类或超类，子类又称作派生类。在UML中，泛化关系用带空心三角形的实线来表示。在代码实现时，使用面向对象的继承机制来实现泛化关系，如在Java语言中使用<code>extends</code>关键字，在C++&#x2F;C#中使用冒号<code>:</code>来实现。以Person类、Student类、Teacher类为例展示类图如下：</p>
+<p><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/202302202200266.png" alt="image-20230220220017138"></p>
+<p>​		上图对应Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> String name;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">move</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">say</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String studentNo;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">study</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Teacher</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String teacherNo;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">teach</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-接口与实现关系"><a href="#4-接口与实现关系" class="headerlink" title="4.接口与实现关系"></a>4.接口与实现关系</h2><p>​		很多面向对象语言中都引入了接口的概念，如Java、C#等，在接口中，通常没有属性，而且所有的操作都是抽象的，只有操作的声明，没有操作的实现。接口之间也可以有与类之间类似的继承关系和依赖关系。在UML中，类与接口之间的实现关系用带空心三角形的虚线来表示。例如，定义一个交通工具Vehicle接口，包含抽象操作move()，在Ship类和Car类中都实现了move()操作，如图所示：</p>
+<p><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/202302202202548.png" alt="image-20230220220209682"></p>
+<p>​		对应的Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Vehicle</span>&#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">move</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Ship</span> <span class="keyword">implements</span> <span class="title class_">Vehicle</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">move</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Car</span> <span class="keyword">implements</span> <span class="title class_">Vehicle</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">move</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://xiaoyaozyq.github.io">yueqiang_zhou</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://xiaoyaozyq.github.io/2023/02/18/UML%E7%B1%BB%E5%9B%BE%E5%9F%BA%E7%A1%80/">https://xiaoyaozyq.github.io/2023/02/18/UML%E7%B1%BB%E5%9B%BE%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://xiaoyaozyq.github.io" target="_blank">橡 语</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/UML%E7%B1%BB%E5%9B%BE/">UML类图</a></div><div class="post_share"><div class="social-share" data-image="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/1111.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/02/15/%E3%80%90vue3%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%AE%9E%E8%B7%B5%E3%80%911-%E5%B7%A5%E7%A8%8B%E6%90%AD%E5%BB%BA/" title="【vue3工程化实践】1.工程搭建"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【vue3工程化实践】1.工程搭建</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/1111.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yueqiang_zhou</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">oak blog（橡语）博客系统</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">类的概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84UML%E5%9B%BE%E7%A4%BA"><span class="toc-number">2.</span> <span class="toc-text">类的UML图示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B1%BB%E4%B8%8E%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.</span> <span class="toc-text">类与类之间的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB"><span class="toc-number">3.1.</span> <span class="toc-text">1.关联关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="toc-number">3.2.</span> <span class="toc-text">2.依赖关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B3%9B%E5%8C%96%E5%85%B3%E7%B3%BB"><span class="toc-number">3.3.</span> <span class="toc-text">3.泛化关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0%E5%85%B3%E7%B3%BB"><span class="toc-number">3.4.</span> <span class="toc-text">4.接口与实现关系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">实例分析</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/18/UML%E7%B1%BB%E5%9B%BE%E5%9F%BA%E7%A1%80/" title="UML类图基础">UML类图基础</a><time datetime="2023-02-18T08:30:41.000Z" title="发表于 2023-02-18 16:30:41">2023-02-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/15/%E3%80%90vue3%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%AE%9E%E8%B7%B5%E3%80%911-%E5%B7%A5%E7%A8%8B%E6%90%AD%E5%BB%BA/" title="【vue3工程化实践】1.工程搭建">【vue3工程化实践】1.工程搭建</a><time datetime="2023-02-15T12:19:41.000Z" title="发表于 2023-02-15 20:19:41">2023-02-15</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zyq-hexoblog-photo.oss-cn-nanjing.aliyuncs.com/%E7%AB%B9%E9%9D%92-1676617091290.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By yueqiang_zhou</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
